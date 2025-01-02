@@ -1,5 +1,7 @@
 C:\spring5fs\sp5-chap13\src\main\java\spring\Member.java
 C:\spring5fs\sp5-chap13\src\main\java\spring\RegisterRequest.java
+C:\spring5fs\sp5-chap13\src\main\java\spring\AuthService.java
+C:\spring5fs\sp5-chap13\src\main\java\controller\LoginCommandValidator.java
 C:\spring5fs\sp5-chap13\src\main\java\controller\RegisterController.java
 C:\spring5fs\sp5-chap13\src\main\java\survey\Respondent.java
 C:\spring5fs\sp5-chap13\src\main\java\spring\DuplicateMemberException.java
@@ -8,8 +10,11 @@ C:\spring5fs\sp5-chap13\src\main\java\survey\AnsweredData.java
 C:\spring5fs\sp5-chap13\src\main\java\controller\RegisterRequestValidator.java
 C:\spring5fs\sp5-chap13\src\main\java\spring\MemberRegisterService.java
 C:\spring5fs\sp5-chap13\src\main\java\survey\Question.java
+C:\spring5fs\sp5-chap13\src\main\java\controller\LoginCommand.java
 C:\spring5fs\sp5-chap13\src\main\java\survey\SurveyController.java
 C:\spring5fs\sp5-chap13\src\main\java\config\MemberConfig.java
+C:\spring5fs\sp5-chap13\src\main\java\controller\LoginController.java
+C:\spring5fs\sp5-chap13\src\main\java\spring\AuthInfo.java
 C:\spring5fs\sp5-chap13\src\main\java\spring\WrongIdPasswordException.java
 C:\spring5fs\sp5-chap13\src\main\java\config\ControllerConfig.java
 C:\spring5fs\sp5-chap13\src\main\java\config\MvcConfig.java

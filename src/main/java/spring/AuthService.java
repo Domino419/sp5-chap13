@@ -21,7 +21,7 @@ public class AuthService {
      * description   : 주어진 이메일과 비밀번호를 사용하여 회원을 인증. 인증 실패 시 예외를 발생시키고,
      *                 인증 성공 시 Authinfo 객체를 반환.
      */
-    public Authinfo authenticate(String email, String password) {
+    public AuthInfo authenticate(String email, String password) {
         Member member = memberDao.selectByEmail(email);
         if(member == null) {
             throw new WrongIdPasswordException() ;
@@ -29,7 +29,7 @@ public class AuthService {
         if(!member.matchPassword(password)){
             throw new WrongIdPasswordException() ;
         }
-        return new Authinfo(member.getId(), member.getEmail(), member.getName()) ;
+        return new AuthInfo(member.getId(), member.getEmail(), member.getName()) ;
     }
 
 }

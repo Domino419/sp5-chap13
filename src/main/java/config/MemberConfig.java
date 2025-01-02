@@ -7,6 +7,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import spring.AuthService;
 import spring.ChangePasswordService;
 import spring.MemberDao;
 import spring.MemberRegisterService;
@@ -85,5 +86,19 @@ public class MemberConfig {
 		ChangePasswordService pwdSvc = new ChangePasswordService();
 		pwdSvc.setMemberDao(memberDao());
 		return pwdSvc;
+	}
+
+	/**
+	 * method        : authService
+	 * date          : 25-01-02
+	 * return        : AuthService - 인증 서비스 객체
+	 * description   : 회원의 이메일과 비밀번호를 검증하고 인증 정보를 생성하는 AuthService 객체를 생성 및 반환.
+	 *                 MemberDao 객체를 주입하여 인증 로직에서 회원 데이터를 확인하는 데 사용.
+	 */
+	@Bean
+	public AuthService authService(){
+		AuthService authService = new AuthService();
+		authService.setMemberDao(memberDao());
+		return authService;
 	}
 }
