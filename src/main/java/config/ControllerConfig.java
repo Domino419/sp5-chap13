@@ -1,5 +1,8 @@
 package config;
 
+import controller.LogoutController;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +26,7 @@ public class ControllerConfig {
 	@Autowired
 	private AuthService authService;             // 로그인 검증을 위한 서비스를 주입받는 필드
 
+	private static final Log log = LogFactory.getLog(RegisterController.class);  // log
 
 	/**
 	 * method        : registerController
@@ -50,5 +54,17 @@ public class ControllerConfig {
 		LoginController controller = new LoginController();
 		controller.setAuthService(authService);
 		return controller;
+	}
+
+	/**
+	 * method        : logoutController
+	 * date          : 25-01-02
+	 * return        : LogoutController - 로그아웃 기능을 처리하는 컨트롤러
+	 * description   : 로그아웃 요청을 처리하는 LogoutController를 스프링 빈으로 등록.
+	 */
+	@Bean
+	public LogoutController logoutController() {
+		log.info(":::::::::::::::::::::::::::::::::: ControllerConfig.LogoutController ");
+		return new LogoutController();
 	}
 }

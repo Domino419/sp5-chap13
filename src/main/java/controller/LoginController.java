@@ -1,5 +1,7 @@
 package controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import spring.AuthInfo;
 import spring.AuthService;
 import spring.WrongIdPasswordException;
+
+import javax.servlet.http.HttpSession;
+
 
 /**
  * class         : LoginController
@@ -21,6 +26,7 @@ import spring.WrongIdPasswordException;
 public class LoginController {
     private AuthService authService;
 
+    private static final Log log = LogFactory.getLog(RegisterController.class); // 로그 추가
 
     /**
      * method        : setAuthService
@@ -53,7 +59,8 @@ public class LoginController {
      * description   : POST 요청 시 로그인 데이터를 검증하고, 인증 성공 시 성공 뷰를, 실패 시 폼 뷰를 반환.
      */
     @PostMapping
-    public String submit(LoginCommand loginCommand, Errors errors) {
+    public String submit(LoginCommand loginCommand, Errors errors, HttpSession session) {
+//        public String submit(LoginCommand loginCommand, Errors errors) {     // 세션 추가 전
         new LoginCommandValidator().validate(loginCommand, errors);
         if(errors.hasErrors()) {
             return "login/loginForm";    // 로그인 폼을 보여주기 위한 뷰
@@ -61,11 +68,15 @@ public class LoginController {
             AuthInfo authInfo = authService.authenticate(
                      loginCommand.getEmail()
                     ,loginCommand.getPassword() ) ;
-            //Todo 세션에 authInfo 저장해야 함
+            session.setAttribute("authInfo", authInfo); // 로그인 성공 정보를 세션에 저장
+            log.info("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::LoginController.submit.session 저장 성공 : " + authInfo);
+
             return "login/loginSuccess";  // 로그인 성공 결과를 보여주기 위한 뷰
         } catch (WrongIdPasswordException e) {
             errors.reject("idPasswordNotMatching");
             return "login/loginForm";     // 로그인 폼을 보여주기 위한 뷰
         }
     }
+
+
 }
