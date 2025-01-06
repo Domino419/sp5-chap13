@@ -104,6 +104,7 @@ public class LoginController {
             return "login/loginSuccess";  // 로그인 성공 결과를 보여주기 위한 뷰
         } catch (WrongIdPasswordException e) {
             errors.reject("idPasswordNotMatching");
+            log.info("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
             return "login/loginForm";     // 로그인 폼을 보여주기 위한 뷰
         }
     }
