@@ -1,16 +1,13 @@
 package config;
 
 import controller.RegisterRequestValidator;
+import interceptor.AuthCheckInterceptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.Validator;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 /**
  * class         : MvcConfig
@@ -72,6 +69,27 @@ public class MvcConfig implements WebMvcConfigurer {
 	}
 
 	/**
+	 * method        : addInterceptors
+	 * date          : 25-01-06
+	 * return        : void
+	 * description   : 인터셉터를 등록하는 메서드로, "/edit/**" 경로로 들어오는 요청에 대해 `AuthCheckInterceptor`를 적용.
+	 */
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(authCheckInterceptor()).addPathPatterns("/edit/**");
+	}
+
+	/**
+	 * method        : authCheckInterceptor
+	 * date          : 25-01-06
+	 * return        : AuthCheckInterceptor - 인증 체크를 위한 인터셉터 객체
+	 */
+	@Bean
+	public AuthCheckInterceptor authCheckInterceptor() {
+		return new AuthCheckInterceptor();
+	}
+
+	/**
 	 * method        : messageSource
 	 * date          : 24-12-26
 	 * param         : None
@@ -86,5 +104,6 @@ public class MvcConfig implements WebMvcConfigurer {
 		ms.setDefaultEncoding("UTF-8");    		// 메시지 파일의 문자 인코딩 설정
 		return ms;   							// MessageSource 객체 반환
 	}
+
 
 }
